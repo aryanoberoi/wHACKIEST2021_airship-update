@@ -74,7 +74,7 @@ void intro()
 	cout<<setw(214)<<"by Aryan, Kushal and Shivam\n\n";
 }
 
-void sus();
+void sus()
 {
 	int abc=0;
 	long phno_infected;
