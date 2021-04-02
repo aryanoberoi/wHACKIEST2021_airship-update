@@ -2,13 +2,44 @@
 
 using namespace std;
 
+int sus=0;
+
+class customer_entry
+{
+    char name[50];
+    long phone;
+
+    public:
+        void input()
+        {
+            cout<<"\n Enter your name: ";
+            gets(name);
+
+            cout<<"\n Enter your phone number: ";
+            cin>>phone;
+        }
+
+        void output()
+        {
+            cout<<"\n Name: ";
+            cout<<name;
+
+            cout<<"\n Phone number: ";
+            cout<<phone;
+        }
+
+        char *getname()
+        {
+            return name;
+        }
+
+};
 
 void intro()
 {
 	cout<<setw(328)<<"Contact Tracing Software";	
 	cout<<setw(214)<<"by Aryan, Kushal and Shivam\n\n";
 }
-
 
 int main()
 {	
