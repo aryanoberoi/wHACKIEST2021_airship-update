@@ -8,8 +8,23 @@ class customer_entry
 {
     char name[50];
     long phone;
+    
+    int entry_hour;
+    int entry_min; 
+    int entry_sec;
 
     public:
+    	
+    	void entry_time()
+        {
+           time_t now2 = time(0);
+           tm *ltma = localtime(&now2);
+            entry_hour = ltma->tm_hour;
+            entry_min = ltma->tm_min;
+            entry_sec = ltma->tm_sec;
+
+        }
+        
         void input()
         {
             cout<<"\n Enter your name: ";
@@ -17,6 +32,8 @@ class customer_entry
 
             cout<<"\n Enter your phone number: ";
             cin>>phone;
+            
+            entry_time();
         }
 
         void output()
@@ -26,6 +43,8 @@ class customer_entry
 
             cout<<"\n Phone number: ";
             cout<<phone;
+            
+            cout<<"The time is: "<<entry_hour<<":"<<entry_min<<":"<<entry_sec;
         }
 
         char *getname()
@@ -40,6 +59,7 @@ void intro()
 	cout<<setw(328)<<"Contact Tracing Software";	
 	cout<<setw(214)<<"by Aryan, Kushal and Shivam\n\n";
 }
+
 
 int main()
 {	
