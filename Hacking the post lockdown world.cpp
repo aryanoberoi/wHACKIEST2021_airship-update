@@ -64,8 +64,10 @@ void intro()
 int main()
 {	
 	intro();
-	
 	int choice;
+	
+	loop: 
+	
 	cout<<"Menu\n1:Customer Entry\n2:Customer Exit\n3:Report Case\n4:Exit\n";
 	cout<<"\n\nEnter your choice: ";
 	cin>>choice;
@@ -81,5 +83,7 @@ int main()
 		case 4:
 			exit(0);
 	}
+	
+	goto loop:
 	return 0;
 }
