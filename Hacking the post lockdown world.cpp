@@ -92,11 +92,15 @@ void sus()
 		s[abc].output;
 		
 		cout<<"List of people to warn\n"
-		
-			if(s[j].entry_hour>=s[abc].entry_hour && s[j].entry_min>=s[abc].entry_min && s[j].entry_sec>=s[abc].entry_sec)
+		while()
+			if(s[j].entry_hour<=s[abc].exit_hour && s[j].entry_min<=s[abc].exit_min && s[j].entry_sec<=s[abc].exit_sec)
 			{
-				
+				if(s[j].entry_hour>=s[abc].entry_hour && s[j].entry_min>=s[abc].entry_hour && s[j].entry_sec>=s[abc].entry_sec)
+				{
+					
+				}
 			}
+		}
 	}
 	
 	else()
