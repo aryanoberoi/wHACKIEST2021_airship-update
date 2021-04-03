@@ -164,7 +164,6 @@ int main()
 			    	file.write((char*)&s[i],sizeof(s[i]));
 					}	
 				}
-				++i;
 			break;
 				}
 				
