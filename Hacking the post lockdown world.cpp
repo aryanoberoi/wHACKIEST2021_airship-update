@@ -4,20 +4,19 @@ using namespace std;
 
 class customer_entry
 {
-    char name[50];
-    long phone;
-    
-    
-    
-    int entry_hour;
-    int entry_min; 
-    int entry_sec;
-    int exit_hour;
-    int exit_min; 
-    int exit_sec;
+	char name[50];
+   	long phone;
 
     public:
     	
+    	int entry_hour;
+    	int entry_min; 
+    	int entry_sec;
+    	int exit_hour;
+    	int exit_min; 
+    	int exit_sec;
+    	
+    
     	void input()
         {
             cout<<"\nEnter your name: ";
@@ -79,7 +78,7 @@ void intro()
 	cout<<setw(214)<<"by Aryan, Kushal and Shivam\n\n";
 }
 
-void sus()
+void sus(customer_entry s[100], int no_of_rec)
 {
 	int abc=0, j=0,n=no_of_rec;
 	long phno_infected;
@@ -87,18 +86,26 @@ void sus()
 	cout<<"Enter phone number: ";
 	cin>>phno_infected;
 	
-	while(s[abc].phone!=phno_infected)
+	while(s[abc].getphone()!=phno_infected)
 	{
 		++abc;
+		
+		if(abc>n)
+		{
+			cout<<"Record not found/n";
+			break;
+		}
 	}
 	
-	if(s[abc].phone==phno_infected)
+	if(s[abc].getphone()==phno_infected)
 	{
 		cout<<"Details of the infected person\n";
-		s[abc].output;
+		s[abc].output();
 		
-		cout<<"List of people to warn\n"
+		cout<<"List of people to warn\n";
 		while(j<=n)
+		{
+		
 			if(s[j].entry_hour<=s[abc].exit_hour && s[j].entry_min<=s[abc].exit_min && s[j].entry_sec<=s[abc].exit_sec)			//primary contact
 			{
 				if(s[j].entry_hour>=s[abc].entry_hour && s[j].entry_min>=s[abc].entry_hour && s[j].entry_sec>=s[abc].entry_sec)
@@ -109,14 +116,7 @@ void sus()
 			}
 		}
 	}
-	
-	else()
-	{
-		cout<<"Record not found/n";
-		break;
-	}
-	
-}
+}	
 
 int main()
 {	
@@ -174,7 +174,7 @@ int main()
 			   }
 		
 		case 4:{
-			sus();
+			sus(s,no_of_rec);
 			break;
 		}
 		case 5:{
