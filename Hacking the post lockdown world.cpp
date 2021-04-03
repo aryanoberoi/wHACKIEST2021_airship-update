@@ -2,192 +2,88 @@
 
 using namespace std;
 
+int sus=0;
+
 class customer_entry
 {
-	char name[50];
-   	long phone;
+    char name[50];
+    long phone;
+    
+    int entry_hour;
+    int entry_min; 
+    int entry_sec;
 
     public:
     	
-    	int entry_hour;
-    	int entry_min; 
-    	int entry_sec;
-    	int exit_hour;
-    	int exit_min; 
-    	int exit_sec;
-    	
-    
-    	void input()
-        {
-            cout<<"\nEnter your name: ";
-            cin>>name;
-
-            cout<<"\nEnter your phone number: ";
-            cin>>phone;
-            
-            entry_time();
-            
-            
-        }
-    	
-    	void exit_time()
-    	{
-    		time_t now = time(0);
-        	tm *ltm = localtime(&now);
-            exit_hour = ltm->tm_hour;
-            exit_min = ltm->tm_min;
-            exit_sec = ltm->tm_sec;
-		}
-    	
     	void entry_time()
         {
-        	time_t now2 = time(0);
-        	tm *ltma = localtime(&now2);
+           time_t now2 = time(0);
+           tm *ltma = localtime(&now2);
             entry_hour = ltma->tm_hour;
             entry_min = ltma->tm_min;
             entry_sec = ltma->tm_sec;
 
         }
         
-        
+        void input()
+        {
+            cout<<"\n Enter your name: ";
+            gets(name);
+
+            cout<<"\n Enter your phone number: ";
+            cin>>phone;
+            
+            entry_time();
+        }
+
         void output()
         {
-            cout<<"\nName: ";
+            cout<<"\n Name: ";
             cout<<name;
 
-            cout<<"\nPhone number: ";
+            cout<<"\n Phone number: ";
             cout<<phone;
             
-            cout<<"\nThe time when entering: "<<entry_hour<<":"<<entry_min<<":"<<entry_sec;
-            cout<<"\nThe time when exiting: "<<exit_hour<<":"<<exit_min<<":"<<exit_sec;
-            
-            
+            cout<<"The time is: "<<entry_hour<<":"<<entry_min<<":"<<entry_sec;
         }
 
-        long getphone()
+        char *getname()
         {
-            return phone;
+            return name;
         }
-		
-	
+
 };
 
 void intro()
 {
-	cout<<setw(328)<<"Contact Tracing Software";	
-	cout<<setw(214)<<"by Aryan, Kushal and Shivam\n\n";
+	cout<<setw(60)<<"Contact Tracing Software\n";	
+	cout<<setw(60)<<"by Aryan, Kushal and Shivam\n\n";
 }
 
-void sus(customer_entry s[100], int no_of_rec)
-{
-	int abc=0, j=0,n=no_of_rec;
-	long phno_infected;
-	
-	cout<<"Enter phone number: ";
-	cin>>phno_infected;
-	
-	while(s[abc].getphone()!=phno_infected)
-	{
-		++abc;
-		
-		if(abc>n)
-		{
-			cout<<"Record not found/n";
-			break;
-		}
-	}
-	
-	if(s[abc].getphone()==phno_infected)
-	{
-		cout<<"Details of the infected person\n";
-		s[abc].output();
-		
-		cout<<"List of people to warn\n";
-		while(j<=n)
-		{
-		
-			if(s[j].entry_hour<=s[abc].exit_hour && s[j].entry_min<=s[abc].exit_min && s[j].entry_sec<=s[abc].exit_sec)			//primary contact
-			{
-				if(s[j].entry_hour>=s[abc].entry_hour && s[j].entry_min>=s[abc].entry_hour && s[j].entry_sec>=s[abc].entry_sec)
-				{
-					s[j].output();
-					j++;
-				}
-			}
-		}
-	}
-}	
 
 int main()
 {	
-	long phone_search;
-	fstream file; 
-	customer_entry s[100];
-	int i=0;
+	intro();
 	int choice;
-	int no_of_rec=0;
-	
 	
 	loop: 
-	intro();
-	cout<<"Menu\n1:Customer Entry\n2:Customer Exit\n3: Show All Customers\n4:Report Case\n5:Exit\n";
+	
+	cout<<"Menu\n1:Customer Entry\n2:Customer Exit\n3:Report Case\n4:Exit\n";
 	cout<<"\n\nEnter your choice: ";
 	cin>>choice;
 	
-
 	switch(choice)
 	{
-		case 1: {
-				
-				s[i].input();
-				no_of_rec+=1;
-				file.open("customer_data.dat",ios::in|ios::app|ios::binary);
-			    file.write((char*)&s[i],sizeof(s[i]));
-			    file.close();
-			    ++i;
-				break;
-				}
-				
-				
-		case 2:{
-			
-		cout<<"Enter your phone number: ";
-			   cin>>phone_search;
-			   file.open("customer_data.dat",ios::in|ios::out|ios::binary);
-			   file.seekg(ios::beg);
-			    while(file.read((char*)&s[i],sizeof(s[i])))
-			    {
-			    	if(phone_search==s[i].getphone())
-			    	{			
-			    	s[i].exit_time();
-			    	file.seekg(file.tellg()-sizeof(s[i]), ios::beg); 
-			    	file.write((char*)&s[i],sizeof(s[i]));
-					}	
-				}
+		case 1:
 			break;
-				}
-				
-				
-		case 3:{
-			
+		case 2:
 			break;
-			   }
-		
-		case 4:{
-			sus(s,no_of_rec);
+		case 3:
 			break;
-		}
-		case 5:{
-			
+		case 4:
 			exit(0);
-		}
-				
-		default:
-			cout<<"\nnInvalid Option. Try again\n";
-			break;
 	}
 	
-	system("CLS");
 	goto loop;
 	return 0;
 }
