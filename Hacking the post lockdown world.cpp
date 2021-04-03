@@ -76,7 +76,7 @@ void intro()
 
 void sus()
 {
-	int abc=0;
+	int abc=0, j=0;
 	long phno_infected;
 	cout<<"Enter phone number: ";
 	cin>>phno_infected;
@@ -88,8 +88,15 @@ void sus()
 	
 	if(s[abc].phone==phno_infected)
 	{
-		cout<<"Details of the infected person/n";
+		cout<<"Details of the infected person\n";
 		s[abc].output;
+		
+		cout<<"List of people to warn\n"
+		
+			if(s[j].entry_hour>=s[abc].entry_hour && s[j].entry_min>=s[abc].entry_min && s[j].entry_sec>=s[abc].entry_sec)
+			{
+				
+			}
 	}
 	
 	else()
@@ -162,6 +169,9 @@ int main()
 			exit(0);
 		}
 				
+		default:
+			cout<<"\nnInvalid Option. Try again\n";
+			break;
 	}
 	
 	system("CLS");
