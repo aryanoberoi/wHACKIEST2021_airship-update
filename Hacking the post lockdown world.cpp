@@ -74,11 +74,11 @@ class customer_entry
 
 void intro()
 {
-	cout<<setw(60)<<"Contact Tracing Software\n";	
-	cout<<setw(60)<<"by Aryan, Kushal and Shivam\n\n";
+	cout<<setw(328)<<"Contact Tracing Software";	
+	cout<<setw(214)<<"by Aryan, Kushal and Shivam\n\n";
 }
 
-void sus(customer_entry s[100], int no_of_rec)
+void sus(customer_entry s[100], int no_of_rec)		//sorting
 {
 	int abc=0, j=0,n=no_of_rec;
 	long phno_infected;
@@ -102,18 +102,64 @@ void sus(customer_entry s[100], int no_of_rec)
 		cout<<"Details of the infected person\n";
 		s[abc].output();
 		
-		cout<<"List of people to warn\n";
+		cout<<"\nList of people to warn\n";
 		while(j<=n)
 		{
+		if(j!=abc)
+		{
 		
-			if(s[j].entry_hour<=s[abc].exit_hour && s[j].entry_min<=s[abc].exit_min && s[j].entry_sec<=s[abc].exit_sec)			//primary contact
+	
+			if(s[j].exit_hour >= s[abc].entry_hour && s[j].exit_hour <= s[abc].exit_hour)
 			{
-				if(s[j].entry_hour>=s[abc].entry_hour && s[j].entry_min>=s[abc].entry_hour && s[j].entry_sec>=s[abc].entry_sec)
+				if(s[j].exit_min >= s[abc].entry_min && s[j].exit_min <= s[abc].exit_min)
 				{
-					s[j].output();
-					j++;
+					if(s[j].exit_sec >= s[abc].entry_sec && s[j].exit_sec <= s[abc].exit_sec)
+					{
+						s[j].output();
+						
+					}
+				}
+		 	} 
+		 	
+		 	
+			if(s[j].entry_hour <= s[abc].exit_hour && s[j].entry_hour >= s[abc].exit_hour)
+			{
+				if(s[j].entry_min <= s[abc].exit_min && s[j].entry_min >= s[abc].exit_min)
+				{
+					if(s[j].entry_sec <= s[abc].exit_sec && s[j].entry_sec >= s[abc].exit_sec)
+					{
+						s[j].output();
+						
+					}
 				}
 			}
+		 
+			if(s[j].entry_hour <= s[abc].entry_hour && s[j].exit_hour >= s[abc].exit_hour)
+			{
+				if(s[j].entry_min <= s[abc].entry_min && s[j].exit_min >= s[abc].exit_min)
+				{
+					if(s[j].entry_sec <= s[abc].entry_sec && s[j].exit_sec >= s[abc].exit_sec)
+					{
+						s[j].output();
+						
+					}
+				}
+			}
+		  
+			if(s[j].entry_hour >= s[abc].entry_hour && s[j].exit_hour <= s[abc].exit_hour)
+			{
+				if(s[j].entry_min >= s[abc].entry_min && s[j].exit_min <= s[abc].exit_min)
+				{
+					if(s[j].entry_sec >= s[abc].entry_sec && s[j].exit_sec <= s[abc].exit_sec)
+					{
+						s[j].output();
+						
+					}
+				}
+			}
+		}
+			
+			++j;
 		}
 	}
 }	
@@ -126,64 +172,75 @@ int main()
 	int i=0;
 	int choice;
 	int no_of_rec=0;
+	int start;
 	
 	
 	loop: 
 	intro();
-	cout<<"Menu\n1:Customer Entry\n2:Customer Exit\n3: Show All Customers\n4:Report Case\n5:Exit\n";
+	cout<<"Menu\n1:Customer Entry\n2:Customer Exit\n3:Show All Customers\n4:Report Case\n5:Exit\n";
 	cout<<"\n\nEnter your choice: ";
 	cin>>choice;
 	
 
 	switch(choice)
 	{
-		case 1: {
+		case 1: 
+		{
 				
-				s[i].input();
-				no_of_rec+=1;
-				file.open("customer_data.dat",ios::in|ios::app|ios::binary);
-			    file.write((char*)&s[i],sizeof(s[i]));
-			    file.close();
-			    ++i;
-				break;
-				}
-				
-				
-		case 2:{
-			
-		cout<<"Enter your phone number: ";
-			   cin>>phone_search;
-			   file.open("customer_data.dat",ios::in|ios::out|ios::binary);
-			   file.seekg(ios::beg);
-			    while(file.read((char*)&s[i],sizeof(s[i])))
-			    {
-			    	if(phone_search==s[i].getphone())
-			    	{			
-			    	s[i].exit_time();
-			    	file.seekg(file.tellg()-sizeof(s[i]), ios::beg); 
-			    	file.write((char*)&s[i],sizeof(s[i]));
-					}	
-				}
-			break;
-				}
-				
-				
-		case 3:{
-			
-			break;
-			   }
-		
-		case 4:{
-			sus(s,no_of_rec);
+			s[i].input();
+			no_of_rec+=1;
+			++i;
 			break;
 		}
-		case 5:{
+				
+				
+		case 2:
+		{
 			
+			cout<<"Enter your phone number: ";
+			cin>>phone_search;
+			start=0;
+			
+			while(start<=no_of_rec)
+			{
+			    if(s[start].getphone()==phone_search)
+			    {			
+			    	s[start].exit_time();
+				}	
+				++start;
+			}
+			system("pause");
+			break;
+		}
+				
+				
+		case 3:
+		{
+			start=0;
+			while(start<=no_of_rec)
+			{
+				s[start].output();
+				++start;
+			}
+			system("pause");
+			break;
+		}
+		
+		case 4:
+		{
+			sus(s,no_of_rec);
+			system("pause");
+			break;
+		}
+		
+		case 5:
+		{
 			exit(0);
 		}
 				
 		default:
 			cout<<"\nnInvalid Option. Try again\n";
+			system("pause");
 			break;
 	}
 	
