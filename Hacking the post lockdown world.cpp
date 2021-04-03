@@ -17,18 +17,7 @@ class customer_entry
     	int exit_sec;
     	
     
-    	void input()
-        {
-            cout<<"\nEnter your name: ";
-            cin>>name;
-
-            cout<<"\nEnter your phone number: ";
-            cin>>phone;
-            
-            entry_time();
-            
-            
-        }
+    	void input();
     	
     	void exit_time()
     	{
@@ -71,6 +60,26 @@ class customer_entry
 		
 	
 };
+
+void customer_entry::input()
+        {
+
+                    system("CLS");
+                    cout<<"\nEnter your name: ";
+                    cin>>name;
+
+                    if(strcmpi(name,"amongus")==0) //easter egg pls give marks
+                    {
+                        cout<<"you are very sus hehehehehehehehehehehehe"<<"\n";
+                        system("pause");
+                        exit(0);
+                    }
+
+                    cout<<"\nEnter your phone number: ";
+                    cin>>phone;
+
+                    entry_time();
+         }
 
 void intro()
 {
@@ -116,6 +125,7 @@ void sus(customer_entry s[100], int no_of_rec)		//sorting
 					if(s[j].exit_sec >= s[abc].entry_sec && s[j].exit_sec <= s[abc].exit_sec)
 					{
 						s[j].output();
+						goto loop1;
 						
 					}
 				}
@@ -129,6 +139,7 @@ void sus(customer_entry s[100], int no_of_rec)		//sorting
 					if(s[j].entry_sec <= s[abc].exit_sec && s[j].entry_sec >= s[abc].exit_sec)
 					{
 						s[j].output();
+						goto loop2;
 						
 					}
 				}
@@ -141,7 +152,7 @@ void sus(customer_entry s[100], int no_of_rec)		//sorting
 					if(s[j].entry_sec <= s[abc].entry_sec && s[j].exit_sec >= s[abc].exit_sec)
 					{
 						s[j].output();
-						
+						goto loop3;
 					}
 				}
 			}
@@ -153,12 +164,15 @@ void sus(customer_entry s[100], int no_of_rec)		//sorting
 					if(s[j].entry_sec >= s[abc].entry_sec && s[j].exit_sec <= s[abc].exit_sec)
 					{
 						s[j].output();
-						
+						goto loop4;
 					}
 				}
 			}
 		}
-			
+			loop1:
+			loop2:
+			loop3:
+			loop4:
 			++j;
 		}
 	}
@@ -217,10 +231,10 @@ int main()
 		case 3:
 		{
 			start=0;
-			while(start<=no_of_rec)
+			while(start<=no_of_rec-1)
 			{
 				s[start].output();
-				++start;
+				start++;
 			}
 			system("pause");
 			break;
