@@ -112,7 +112,7 @@ void sus(customer_entry s[100], int no_of_rec)		//sorting
 		s[abc].output();
 		
 		cout<<"\nList of people to warn\n";
-		while(j<=n)
+		while(j<=n)			//test cases
 		{
 		if(j!=abc)
 		{
