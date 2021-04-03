@@ -7,6 +7,8 @@ class customer_entry
     char name[50];
     long phone;
     
+    
+    
     int entry_hour;
     int entry_min; 
     int entry_sec;
@@ -25,6 +27,8 @@ class customer_entry
             cin>>phone;
             
             entry_time();
+            
+            
         }
     	
     	void exit_time()
@@ -65,7 +69,8 @@ class customer_entry
         {
             return phone;
         }
-
+		
+	
 };
 
 void intro()
@@ -76,8 +81,9 @@ void intro()
 
 void sus()
 {
-	int abc=0, j=0;
+	int abc=0, j=0,n=no_of_rec;
 	long phno_infected;
+	
 	cout<<"Enter phone number: ";
 	cin>>phno_infected;
 	
@@ -92,12 +98,13 @@ void sus()
 		s[abc].output;
 		
 		cout<<"List of people to warn\n"
-		while()
-			if(s[j].entry_hour<=s[abc].exit_hour && s[j].entry_min<=s[abc].exit_min && s[j].entry_sec<=s[abc].exit_sec)
+		while(j<=n)
+			if(s[j].entry_hour<=s[abc].exit_hour && s[j].entry_min<=s[abc].exit_min && s[j].entry_sec<=s[abc].exit_sec)			//primary contact
 			{
 				if(s[j].entry_hour>=s[abc].entry_hour && s[j].entry_min>=s[abc].entry_hour && s[j].entry_sec>=s[abc].entry_sec)
 				{
-					
+					s[j].output();
+					j++;
 				}
 			}
 		}
@@ -118,6 +125,8 @@ int main()
 	customer_entry s[100];
 	int i=0;
 	int choice;
+	int no_of_rec=0;
+	
 	
 	loop: 
 	intro();
@@ -131,6 +140,7 @@ int main()
 		case 1: {
 				
 				s[i].input();
+				no_of_rec+=1;
 				file.open("customer_data.dat",ios::in|ios::app|ios::binary);
 			    file.write((char*)&s[i],sizeof(s[i]));
 			    file.close();
