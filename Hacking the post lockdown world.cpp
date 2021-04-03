@@ -74,8 +74,8 @@ class customer_entry
 
 void intro()
 {
-	cout<<setw(328)<<"Contact Tracing Software";	
-	cout<<setw(214)<<"by Aryan, Kushal and Shivam\n\n";
+	cout<<setw(60)<<"Contact Tracing Software\n";	
+	cout<<setw(60)<<"by Aryan, Kushal and Shivam\n\n";
 }
 
 void sus(customer_entry s[100], int no_of_rec)
